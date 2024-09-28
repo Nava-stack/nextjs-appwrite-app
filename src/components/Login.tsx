@@ -8,7 +8,7 @@ import React, { useState, FormEvent } from "react";
 
 export default function Login() {
   const router = useRouter();
-  const [formdata, setFormdata] = useState({
+  const [formdata, setformdata] = useState({
     email: "",
     password: "",
   });
@@ -31,57 +31,86 @@ export default function Login() {
   };
 
   return (
-    <div>
-      <h1>Login</h1>
-
-      <form
-        onSubmit={handleSubmit}
-        className="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md"
-      >
-        {error && <p className="text-red-500 mb-4">{error}</p>}
-        <div className="mb-4">
-          <label htmlFor="email" className="block text-gray-700">
-            Email
-          </label>
-          <input
-            type="email"
-            id="email"
-            value={formdata.email}
-            onChange={(e) =>
-              setFormdata({ ...formdata, email: e.target.value })
-            }
-            className="w-full px-3 py-2 border border-gray-300 rounded-md"
-            required
-          />
+    <div className="flex items-center justify-center w-full">
+      <div className={`mx-auto w-full max-w-lg bg-gray-200/50 rounded-xl p-10`}>
+        <div className="mb-2 flex justify-center">
+          <span className="inline-block w-full max-w-[60px]">
+            <img src="/favicon.ico" alt="Logo" />
+          </span>
         </div>
-        <div className="mb-4">
-          <label htmlFor="password" className="block text-gray-700">
-            Password
-          </label>
-          <input
-            type="password"
-            id="password"
-            value={formdata.password}
-            onChange={(e) =>
-              setFormdata({ ...formdata, password: e.target.value })
-            }
-            className="w-full px-3 py-2 border border-gray-300 rounded-md"
-            required
-          />
-        </div>
-        <button
-          type="submit"
-          className="w-full py-2 px-3 bg-indigo-600 text-white rounded-md"
-        >
-          Login
-        </button>
-        <p className="mt-4 text-center">
-          Don&apos;t have an account?{" "}
-          <Link href="/signup">
-            <a className="text-indigo-600">Signup</a>
+        <h2 className="text-center text-2xl font-bold leading-tight text-black">
+          Sign in to your account
+        </h2>
+        <p className="mt-2 text-center text-base text-gray-600">
+          Don&apos;t have any account?&nbsp;
+          <Link
+            href="/signup"
+            className="font-medium text-primary transition-all duration-200 hover:underline"
+          >
+            Sign Up
           </Link>
         </p>
-      </form>
+        {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
+        <form onSubmit={handleSubmit} className="mt-8">
+          <div className="space-y-5">
+            <div>
+              <label
+                htmlFor="email"
+                className="text-base font-medium text-gray-900"
+              >
+                Email address
+              </label>
+              <div className="mt-2">
+                <input
+                  className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
+                  type="email"
+                  value={formdata.email}
+                  onChange={(e) =>
+                    setformdata((prev) => ({ ...prev, email: e.target.value }))
+                  }
+                  placeholder="Email"
+                  id="email"
+                  required
+                />
+              </div>
+            </div>
+            <div>
+              <div className="flex items-center justify-between">
+                <label
+                  htmlFor="password"
+                  className="text-base font-medium text-gray-900"
+                >
+                  Password
+                </label>
+              </div>
+              <div className="mt-2">
+                <input
+                  className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
+                  type="password"
+                  placeholder="Password"
+                  value={formdata.password}
+                  onChange={(e) =>
+                    setformdata((prev) => ({
+                      ...prev,
+                      password: e.target.value,
+                    }))
+                  }
+                  id="password"
+                  required
+                />
+              </div>
+            </div>
+            <div>
+              <button
+                type="submit"
+                className="inline-flex w-full items-center justify-center rounded-md bg-primary px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-primary/80"
+              >
+                Sign in
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }
